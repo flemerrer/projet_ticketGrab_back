@@ -2,6 +2,8 @@ package com.example.ticket_front.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name="tickets")
 public class Ticket {
@@ -10,9 +12,19 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String name;
+
     @ManyToOne
-    @JoinColumn(name="event_id", nullable=false)
+    @JoinColumn(name="event_id", referencedColumnName = "id", nullable=false)
     private Event event;
+
+    @ManyToOne
+    @JoinColumn(name="basket_id", referencedColumnName = "id", nullable=false)
+    private Basket basket;
+
+    @ManyToOne
+    @JoinColumn(name="order_id", referencedColumnName = "id", nullable=false)
+    private Order order;
 
 /*
     @ManyToOne
@@ -20,7 +32,7 @@ public class Ticket {
     private User seller;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id", referencedColumnName = "id")
+    @JoinColumn(name="user_id", referencedColumnName = "buyer_id")
     private User buyer;
 */
 
@@ -33,11 +45,9 @@ public class Ticket {
 
     private boolean isSold;
 
-    public Ticket(Long id, Event event, /*User seller, User buyer,*/ String imageLink, int price, boolean onSale, boolean isSold) {
-        this.id = id;
+    public Ticket(String name, Event event, String imageLink, int price, boolean onSale, boolean isSold) {
+        this.name = name;
         this.event = event;
-//        this.seller = seller;
-//        this.buyer = buyer;
         this.imageLink = imageLink;
         this.price = price;
         this.onSale = onSale;

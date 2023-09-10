@@ -13,9 +13,8 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
     @OneToMany(mappedBy = "event")
-    private Set<Ticket> ticket;
+    private Set<Ticket> ticketSet;
 
     private LocalDate date;
 
@@ -25,9 +24,7 @@ public class Event {
 
     private String website;
 
-    public Event(Long id, Set<Ticket> ticket, LocalDate date, String location, String city, String website) {
-        this.id = id;
-        this.ticket = ticket;
+    public Event(LocalDate date, String location, String city, String website) {
         this.date = date;
         this.location = location;
         this.city = city;
@@ -45,12 +42,12 @@ public class Event {
         this.id = id;
     }
 
-    public Set<Ticket> getTicket() {
-        return ticket;
+    public Set<Ticket> getTicketSet() {
+        return ticketSet;
     }
 
-    public void setTicket(Set<Ticket> ticket) {
-        this.ticket = ticket;
+    public void setTicketSet(Set<Ticket> ticket) {
+        this.ticketSet = ticket;
     }
 
     public LocalDate getDate() {
@@ -89,7 +86,7 @@ public class Event {
     public String toString() {
         return "Event{" +
                 "id=" + id +
-                ", ticket=" + ticket +
+                ", ticket=" + ticketSet +
                 ", date=" + date +
                 ", location='" + location + '\'' +
                 ", city='" + city + '\'' +
