@@ -1,7 +1,7 @@
-package com.example.ticket_front.services;
+package com.example.ticket_api.services;
 
-import com.example.ticket_front.entities.Order;
-import com.example.ticket_front.repositories.OrderRepository;
+import com.example.ticket_api.entities.Order;
+import com.example.ticket_api.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

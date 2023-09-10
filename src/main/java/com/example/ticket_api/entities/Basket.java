@@ -1,8 +1,8 @@
-package com.example.ticket_front.entities;
+package com.example.ticket_api.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name="baskets")
@@ -12,16 +12,16 @@ public class Basket {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(mappedBy = "basket")
-    private Set<Ticket> ticketSet;
+    @OneToMany (mappedBy = "basket")
+    private List<Ticket> ticketList;
 
     /*
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User buyer;
 */
-    public Basket(Set<Ticket> ticketSet /*, User buyer*/) {
-        this.ticketSet = ticketSet;
+    public Basket(List<Ticket> ticketList /*, User buyer*/) {
+        this.ticketList = ticketList;
       /*  this.buyer = buyer;*/
     }
 
@@ -32,23 +32,23 @@ public class Basket {
         return id;
     }
 
-    public void setId(Long id) {
+    public void ListId(Long id) {
         this.id = id;
     }
 
-    public Set<Ticket> getTicketSet() {
-        return ticketSet;
+    public List<Ticket> getTicketList() {
+        return ticketList;
     }
 
-    public void setTicketSet(Set<Ticket> ticket) {
-        this.ticketSet = ticket;
+    public void ListTicketList(List<Ticket> ticket) {
+        this.ticketList = ticket;
     }
 /*
     public User getBuyer() {
         return buyer;
     }
 
-    public void setBuyer(User buyer) {
+    public void ListBuyer(User buyer) {
         this.buyer = buyer;
     }
     */

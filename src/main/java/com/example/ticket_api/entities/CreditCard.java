@@ -1,4 +1,4 @@
-package com.example.ticket_front.entities;
+package com.example.ticket_api.entities;
 
 import jakarta.persistence.*;
 

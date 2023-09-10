@@ -1,7 +1,7 @@
-package com.example.ticket_front.services;
+package com.example.ticket_api.services;
 
-import com.example.ticket_front.entities.Ticket;
-import com.example.ticket_front.repositories.TicketRepository;
+import com.example.ticket_api.entities.Ticket;
+import com.example.ticket_api.repositories.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +18,8 @@ public class TicketService {
         return ticketRepo.findAll();
     }
 
-    public List<Ticket> FindTicket(String title) {
-        return ticketRepo.findByTitleContainsIgnoreCase(title);
+    public List<Ticket> FindTicket(String name) {
+        return ticketRepo.findByNameContainsIgnoreCase(name);
     }
 
     public Optional<Ticket> findTicketById(Long id) {

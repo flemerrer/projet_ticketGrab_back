@@ -1,7 +1,6 @@
-package com.example.ticket_front.repositories;
+package com.example.ticket_api.repositories;
 
-import com.example.ticket_front.entities.CreditCard;
-import com.example.ticket_front.entities.Ticket;
+import com.example.ticket_api.entities.CreditCard;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

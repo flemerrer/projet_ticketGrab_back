@@ -1,9 +1,9 @@
-package com.example.ticket_front.entities;
+package com.example.ticket_api.entities;
 
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name="events")
@@ -13,9 +13,12 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(mappedBy = "event")
-    private Set<Ticket> ticketSet;
+    private String name;
 
+    @OneToMany(mappedBy = "event")
+    private List<Ticket> ticketList;
+
+    @Temporal(TemporalType.DATE)
     private LocalDate date;
 
     private String location;
@@ -24,7 +27,8 @@ public class Event {
 
     private String website;
 
-    public Event(LocalDate date, String location, String city, String website) {
+    public Event(String name, LocalDate date, String location, String city, String website) {
+        this.name = name;
         this.date = date;
         this.location = location;
         this.city = city;
@@ -38,23 +42,23 @@ public class Event {
         return id;
     }
 
-    public void setId(Long id) {
+    public void ListId(Long id) {
         this.id = id;
     }
 
-    public Set<Ticket> getTicketSet() {
-        return ticketSet;
+    public List<Ticket> getTicketList() {
+        return ticketList;
     }
 
-    public void setTicketSet(Set<Ticket> ticket) {
-        this.ticketSet = ticket;
+    public void ListTicketList(List<Ticket> ticket) {
+        this.ticketList = ticket;
     }
 
     public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void ListDate(LocalDate date) {
         this.date = date;
     }
 
@@ -62,7 +66,7 @@ public class Event {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void ListLocation(String location) {
         this.location = location;
     }
 
@@ -70,7 +74,7 @@ public class Event {
         return city;
     }
 
-    public void setCity(String city) {
+    public void ListCity(String city) {
         this.city = city;
     }
 
@@ -78,7 +82,7 @@ public class Event {
         return website;
     }
 
-    public void setWebsite(String website) {
+    public void ListWebsite(String website) {
         this.website = website;
     }
 
@@ -86,7 +90,8 @@ public class Event {
     public String toString() {
         return "Event{" +
                 "id=" + id +
-                ", ticket=" + ticketSet +
+                ", name=" + name +
+                ", tickets=" + ticketList +
                 ", date=" + date +
                 ", location='" + location + '\'' +
                 ", city='" + city + '\'' +

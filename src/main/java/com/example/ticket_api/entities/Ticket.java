@@ -1,8 +1,6 @@
-package com.example.ticket_front.entities;
+package com.example.ticket_api.entities;
 
 import jakarta.persistence.*;
-
-import java.util.Set;
 
 @Entity
 @Table(name="tickets")
@@ -15,15 +13,15 @@ public class Ticket {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name="event_id", referencedColumnName = "id", nullable=false)
+    @JoinColumn(name = "event_id")
     private Event event;
 
     @ManyToOne
-    @JoinColumn(name="basket_id", referencedColumnName = "id", nullable=false)
+    @JoinColumn(name = "basket_id")
     private Basket basket;
 
     @ManyToOne
-    @JoinColumn(name="order_id", referencedColumnName = "id", nullable=false)
+    @JoinColumn(name = "order_id")
     private Order order;
 
 /*
@@ -125,6 +123,7 @@ public class Ticket {
     public String toString() {
         return "Ticket{" +
                 "id=" + id +
+                ", name=" + name +
                 ", event=" + event +
 /*                ", seller=" + seller +
                 ", buyer=" + buyer +*/

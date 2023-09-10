@@ -1,7 +1,7 @@
-package com.example.ticket_front.services;
+package com.example.ticket_api.services;
 
-import com.example.ticket_front.entities.Basket;
-import com.example.ticket_front.repositories.BasketRepository;
+import com.example.ticket_api.entities.Basket;
+import com.example.ticket_api.repositories.BasketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
