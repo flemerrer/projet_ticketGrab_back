@@ -30,7 +30,7 @@ public class TicketService {
         ticketRepo.save(Ticket);
     }
 
-    public void deleteturorialById(Long id) {
+    public void deleteTicketById(Long id) {
         ticketRepo.deleteById(id);
     }
 
