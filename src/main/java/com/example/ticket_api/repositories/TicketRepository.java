@@ -10,7 +10,11 @@ import java.util.List;
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findByNameContainsIgnoreCase(String title);
 
-/*    List<Ticket> findBy();
+    @Override
+    List<Ticket> findAll();
+
+
+    /*    List<Ticket> findBy();
     List<Ticket> findBy();*/
 
 }
