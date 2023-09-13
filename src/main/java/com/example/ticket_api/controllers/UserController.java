@@ -1,7 +1,7 @@
-package com.example.ticket_front.controller;
+package com.example.ticket_api.controllers;
 
-import com.example.ticket_front.entity.User;
-import com.example.ticket_front.service.UserService;
+import com.example.ticket_api.entities.User;
+import com.example.ticket_api.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -26,4 +26,7 @@ public class UserController {
     public ResponseEntity<User> createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
+
+    @PostMapping("/updateusers")
+    public ResponseEntity<User> updateUser(@RequestBody User user) {return userService.updateUser(user);}
 }
