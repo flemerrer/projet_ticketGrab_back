@@ -3,16 +3,12 @@ package com.example.ticket_api.services;
 import com.example.ticket_api.entities.User;
 import com.example.ticket_api.entities.dto.UserDto;
 import com.example.ticket_api.repositories.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
