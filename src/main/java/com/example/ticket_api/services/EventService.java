@@ -18,11 +18,11 @@ public class EventService {
         return eventRepo.findAll();
     }
 
-    public List<Event> FindEvent(String name) {
+    public List<Event> FindEventsByName(String name) {
         return eventRepo.findByNameContainsIgnoreCase(name);
     }
 
-    public Optional<Event> findEventById(Long id) {
+    public Optional<Event> findOneEvent(Long id) {
         return eventRepo.findById(id);
     }
 
@@ -30,7 +30,7 @@ public class EventService {
         eventRepo.save(event);
     }
     
-    public void deleteturorialById(Long id) {
+    public void deleteEvent(Long id) {
         eventRepo.deleteById(id);
     }
     

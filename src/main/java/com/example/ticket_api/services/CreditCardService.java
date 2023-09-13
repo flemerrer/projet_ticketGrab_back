@@ -18,7 +18,7 @@ public class CreditCardService {
         return CreditCardRepo.findAll();
     }
 
-    public Optional<CreditCard> findCreditCardById(Long id) { 
+    public Optional<CreditCard> findOneCreditCard(Long id) {
         return CreditCardRepo.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class CreditCardService {
         CreditCardRepo.save(CreditCard);
     }
     
-    public void deleteturorialById(Long id) {
+    public void deleteCreditCard(Long id) {
         CreditCardRepo.deleteById(id);
     }
     

@@ -18,11 +18,11 @@ public class TicketService {
         return ticketRepo.findAll();
     }
 
-    public List<Ticket> FindTicket(String name) {
+    public List<Ticket> FindTicketsByName(String name) {
         return ticketRepo.findByNameContainsIgnoreCase(name);
     }
 
-    public Optional<Ticket> findTicketById(Long id) {
+    public Optional<Ticket> findOneTicket(Long id) {
         return ticketRepo.findById(id);
     }
 
@@ -30,7 +30,7 @@ public class TicketService {
         ticketRepo.save(Ticket);
     }
 
-    public void deleteTicketById(Long id) {
+    public void deleteTicket(Long id) {
         ticketRepo.deleteById(id);
     }
 

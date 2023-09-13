@@ -18,7 +18,7 @@ public class BasketService {
         return BasketRepo.findAll();
     }
 
-    public Optional<Basket> findBasketById(Long id) { 
+    public Optional<Basket> findOneBasket(Long id) {
         return BasketRepo.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class BasketService {
         BasketRepo.save(Basket);
     }
     
-    public void deleteturorialById(Long id) {
+    public void deleteBasket(Long id) {
         BasketRepo.deleteById(id);
     }
     
