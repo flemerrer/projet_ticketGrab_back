@@ -33,7 +33,8 @@ public class UserService {
 
     public ResponseEntity<String> deleteUser (User user) {
         if (user.getFirstName() != null && user.getLastName() != null && user.getEmail() != null && user.getPassword() != null) {
-            userRepo.delete(user);
+            User u = userRepo.findUserByEmailAndPassword(user.getEmail(), user.getPassword());
+            userRepo.delete(u);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
