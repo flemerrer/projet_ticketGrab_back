@@ -1,6 +1,7 @@
 package com.example.ticket_api.controllers;
 
 import com.example.ticket_api.entities.Event;
+import com.example.ticket_api.entities.dto.EventListDTO;
 import com.example.ticket_api.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +19,31 @@ public class EventController {
     @GetMapping({"", "/all"})
     public List<Event> getAllEvents(){
 
-        List<Event> Eventlist = eventServ.findAllEvents();
-        return Eventlist;
+        List<Event> eventList = eventServ.findAllEvents();
+        return eventList;
     }
 
     @GetMapping("/{id}")
     public Event getOneEvent(@PathVariable Long id){
 
-        Event Eventlist = eventServ.findOneEvent(id).get();
-        return Eventlist ;
+        Event eventList = eventServ.findOneEvent(id).get();
+        return eventList ;
+    }
+
+    @GetMapping({"/list"})
+    public ResponseEntity < List<EventListDTO> > listEvents(){
+
+        List<Event> eventList = eventServ.findAllEvents();
+        List<EventListDTO> eventDtoList = null;
+
+        if (eventList != null) {
+
+            eventDtoList = eventServ.findAllEvents().stream().map(event -> event.toDto()).toList();
+            return ResponseEntity.ok(eventDtoList);
+        } else {
+            return ResponseEntity.status(404).build();
+        }
+
     }
 
     @PostMapping("/add")
