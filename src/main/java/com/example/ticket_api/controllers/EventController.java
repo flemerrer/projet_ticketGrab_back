@@ -1,7 +1,7 @@
 package com.example.ticket_api.controllers;
 
 import com.example.ticket_api.entities.Event;
-import com.example.ticket_api.entities.dto.EventListDTO;
+import com.example.ticket_api.entities.dto.EventDTO;
 import com.example.ticket_api.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,10 +31,10 @@ public class EventController {
     }
 
     @GetMapping({"/list"})
-    public ResponseEntity < List<EventListDTO> > listEvents(){
+    public ResponseEntity < List<EventDTO> > listEvents(){
 
         List<Event> eventList = eventServ.findAllEvents();
-        List<EventListDTO> eventDtoList = null;
+        List<EventDTO> eventDtoList = null;
 
         if (eventList != null) {
 

@@ -1,6 +1,6 @@
 package com.example.ticket_api.entities;
 
-import com.example.ticket_api.entities.dto.EventListDTO;
+import com.example.ticket_api.entities.dto.EventDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -108,9 +108,9 @@ public class Event {
                 '}';
     }
 
-    public EventListDTO toDto() {
+    public EventDTO toDto() {
 
-        EventListDTO eventDto = new EventListDTO();
+        EventDTO eventDto = new EventDTO();
         eventDto.setId(this.getId());
         eventDto.setName(this.getName());
         eventDto.setDate(this.getDate());

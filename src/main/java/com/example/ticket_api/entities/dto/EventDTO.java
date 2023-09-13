@@ -1,19 +1,15 @@
 package com.example.ticket_api.entities.dto;
 
-import com.example.ticket_api.entities.Ticket;
-import jakarta.persistence.*;
-
 import java.time.LocalDate;
-import java.util.List;
 
-public class EventListDTO {
+public class EventDTO {
 
     private Long id;
     private String name;
     private LocalDate date;
     private String city;
 
-    public EventListDTO() {
+    public EventDTO() {
     }
 
     public Long getId() {

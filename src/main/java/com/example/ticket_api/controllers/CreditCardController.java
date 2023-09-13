@@ -22,7 +22,6 @@ public class CreditCardController {
         return creditCardlist;
     }
 
-
     @GetMapping("/{id}")
     public CreditCard getOneCreditCard(@PathVariable Long id){
 
