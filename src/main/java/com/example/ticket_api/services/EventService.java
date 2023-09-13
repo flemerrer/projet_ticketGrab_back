@@ -1,6 +1,7 @@
 package com.example.ticket_api.services;
 
 import com.example.ticket_api.entities.Event;
+import com.example.ticket_api.entities.dto.EventDTO;
 import com.example.ticket_api.repositories.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,10 @@ public class EventService {
     public List<Event> findAllEvents() {
         return eventRepo.findAll();
     }
+
+    public List<EventDTO> fetchAllDTOEvents() {
+        return findAllEvents().stream().map(event -> event.toDto()).toList();
+    };
 
     public List<Event> FindEventsByName(String name) {
         return eventRepo.findByNameContainsIgnoreCase(name);

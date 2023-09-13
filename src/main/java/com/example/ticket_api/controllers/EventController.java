@@ -33,12 +33,9 @@ public class EventController {
     @GetMapping({"/list"})
     public ResponseEntity < List<EventDTO> > listEvents(){
 
-        List<Event> eventList = eventServ.findAllEvents();
-        List<EventDTO> eventDtoList = null;
+        List<EventDTO> eventDtoList = eventServ.fetchAllDTOEvents();
 
-        if (eventList != null) {
-
-            eventDtoList = eventServ.findAllEvents().stream().map(event -> event.toDto()).toList();
+        if (eventDtoList != null) {
             return ResponseEntity.ok(eventDtoList);
         } else {
             return ResponseEntity.status(404).build();
