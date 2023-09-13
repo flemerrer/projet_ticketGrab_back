@@ -10,6 +10,6 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
     public List<User> findUserByIsAdmin(Boolean isAdmin);
     public User findUserByFirstNameAndLastName(String firstName, String lastName);
-    public User findUserByEmailAndPassword(String email, String lastName);
+    public User findUserByEmailAndPassword(String email, String password);
     public User findUserById(Long id);
 }

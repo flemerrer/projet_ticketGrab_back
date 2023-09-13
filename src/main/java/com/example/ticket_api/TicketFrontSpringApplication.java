@@ -49,8 +49,6 @@ public class TicketFrontSpringApplication implements CommandLineRunner {
                     userRepository.save(user);
                 }
             }
-
-
         };
     }
     @Override
