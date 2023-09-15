@@ -6,6 +6,7 @@ import com.example.ticket_api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import java.util.List;
@@ -15,11 +16,14 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public ResponseEntity<User> createUser (User user) {
         if (user.getFirstName() != null && user.getLastName() != null && user.getEmail() != null && user.getPassword() != null) {
             user.setAdmin(false);
             user.setSoldTicketsNumber(0);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepo.save(user);
             return ResponseEntity.status(HttpStatus.CREATED).body(null);
         } else {

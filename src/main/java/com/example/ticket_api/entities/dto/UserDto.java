@@ -11,6 +11,11 @@ public class UserDto {
         this.password02 = password02;
     }
 
+    public UserDto(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     public UserDto() {
     }
 
