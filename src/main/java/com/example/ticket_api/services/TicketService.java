@@ -17,17 +17,16 @@ public class TicketService {
     public List<Ticket> findAllTickets() {
         return ticketRepo.findAll();
     }
-
     public List<Ticket> FindTicketsByName(String name) {
         return ticketRepo.findByNameContainsIgnoreCase(name);
     }
-
     public Optional<Ticket> findOneTicket(Long id) {
         return ticketRepo.findById(id);
     }
 
-    public void create(Ticket Ticket) {
+    public Ticket create(Ticket Ticket) {
         ticketRepo.save(Ticket);
+        return Ticket;
     }
 
     public void deleteTicket(Long id) {

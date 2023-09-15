@@ -16,8 +16,8 @@ public class Event {
 
     private String name;
 
-    @OneToMany(mappedBy = "event")
-    private List<Ticket> ticketList;
+//    @OneToMany(mappedBy = "event")
+//    private List<Ticket> ticketList;
 
     @Temporal(TemporalType.DATE)
     private LocalDate date;
@@ -55,13 +55,13 @@ public class Event {
         this.name = name;
     }
 
-    public List<Ticket> getTicketList() {
-        return ticketList;
-    }
+//    public List<Ticket> getTicketList() {
+//        return ticketList;
+//    }
 
-    public void setTicketList(List<Ticket> ticket) {
-        this.ticketList = ticket;
-    }
+//    public void setTicketList(List<Ticket> ticket) {
+//        this.ticketList = ticket;
+//    }
 
     public LocalDate getDate() {
         return date;
@@ -100,7 +100,7 @@ public class Event {
         return "Event{" +
                 "id=" + id +
                 ", name=" + name +
-                ", tickets=" + ticketList +
+                //", tickets=" + ticketList +
                 ", date=" + date +
                 ", location='" + location + '\'' +
                 ", city='" + city + '\'' +

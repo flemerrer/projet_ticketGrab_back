@@ -1,5 +1,7 @@
 package com.example.ticket_api;
 
+import com.example.ticket_api.entities.Ticket;
+import com.example.ticket_api.repositories.TicketRepository;
 import com.example.ticket_api.services.BasketService;
 import com.example.ticket_api.services.EventService;
 import com.example.ticket_api.services.OrderService;
@@ -12,6 +14,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class TicketFrontSpringApplication implements CommandLineRunner {
@@ -36,7 +41,6 @@ public class TicketFrontSpringApplication implements CommandLineRunner {
     @Bean
     CommandLineRunner commandLineRunner() {
         return new CommandLineRunner() {
-
             @Override
             public void run(String... args) throws Exception {
                 String prenom = "Al";
@@ -49,11 +53,13 @@ public class TicketFrontSpringApplication implements CommandLineRunner {
                     userRepository.save(user);
                 }
             }
+
         };
     }
+
+
     @Override
     public void run(String... args) throws Exception {
-
 //        Event event = new Event("Motocultor", LocalDate.now(), "3 rue Molière", "Paris", "");
 //        eventServ.create(event);
 //

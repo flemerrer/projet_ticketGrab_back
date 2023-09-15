@@ -1,28 +1,32 @@
 package com.example.ticket_api.controllers;
 
 import com.example.ticket_api.entities.Ticket;
+import com.example.ticket_api.entities.dto.TicketDto;
 import com.example.ticket_api.services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/tickets")
+@RequestMapping("/api/tickets") //Marche bien en JSON
 public class TicketController {
 
     @Autowired
     TicketService ticketServ;
 
-    @GetMapping({"", "/all"})
+    @GetMapping({"", "/all"}) //Marche bien en JSON
     public List<Ticket> getAllTickets(){
 
         List<Ticket> tickelist = ticketServ.findAllTickets();
         return tickelist;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") //Marche bien en JSON
     public Ticket getOneTicket(@PathVariable Long id){
 
         Ticket ticketlist = ticketServ.findOneTicket(id).get();
@@ -30,15 +34,14 @@ public class TicketController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity createTicket(@RequestBody Ticket ticket){
-
-        if (ticket != null && ticketServ.findOneTicket(ticket.getId()) == null) {
-            ticketServ.create(ticket);
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.status(409).build();
+    public ResponseEntity<Ticket> createTicket(@RequestBody TicketDto dto){
+        try {
+            Ticket newTicket = new Ticket(dto.getName(), dto.getEvent(), dto.getImageLink(), dto.getPrice(), true, false);
+            ticketServ.create(newTicket);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newTicket);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
         }
-
     }
 
     @PutMapping("/update")

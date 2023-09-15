@@ -14,6 +14,8 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findAll();
 
 
+
+
     /*    List<Ticket> findBy();
     List<Ticket> findBy();*/
 
