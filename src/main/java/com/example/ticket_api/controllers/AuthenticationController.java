@@ -35,6 +35,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> updateUser(@RequestBody User user) {return userService.updateUser(user);}
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        return userService.createUser(user);
+    }
 }
 
