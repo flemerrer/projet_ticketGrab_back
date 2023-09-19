@@ -36,26 +36,26 @@ public class TicketFrontSpringApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Event event = new Event("Motocultor", LocalDate.now(), "3 rue Molière", "Paris", "");
-        eventServ.create(event);
-
-        Ticket ticket1 = new Ticket("pass WE", event, "link", 10000, true, false);
-        Ticket ticket2 = new Ticket("pass jour 1", event, "link", 10000, true, false);
-        ticketServ.create(ticket1);
-        ticketServ.create(ticket2);
-
-        List<Ticket> ticketList = new ArrayList<Ticket>();
-
-        ticketList.add(ticket1);
-        ticketList.add(ticket2);
-
-        Basket basket = new Basket(ticketList);
-        basketServ.create(basket);
-
-        Order order = new Order(ticketList, LocalDate.now());
-        orderServ.create(order);
-
-        System.out.println(event +"\n"+ ticket1 +"\n"+ ticket2 +"\n"+ ticketList +"\n"+ basket +"\n"+ order);
+//        Event event = new Event("Motocultor", LocalDate.now(), "3 rue Molière", "Paris", "");
+//        eventServ.create(event);
+//
+//        Ticket ticket1 = new Ticket("pass WE", event, "link", 10000, true, false);
+//        Ticket ticket2 = new Ticket("pass jour 1", event, "link", 10000, true, false);
+//        ticketServ.create(ticket1);
+//        ticketServ.create(ticket2);
+//
+//        List<Ticket> ticketList = new ArrayList<Ticket>();
+//
+//        ticketList.add(ticket1);
+//        ticketList.add(ticket2);
+//
+//        Basket basket = new Basket(ticketList);
+//        basketServ.create(basket);
+//
+//        Order order = new Order(ticketList, LocalDate.now());
+//        orderServ.create(order);
+//
+//        System.out.println(event +"\n"+ ticket1 +"\n"+ ticket2 +"\n"+ ticketList +"\n"+ basket +"\n"+ order);
 
 
     }

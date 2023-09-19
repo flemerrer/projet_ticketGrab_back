@@ -1,8 +1,9 @@
 package com.example.ticket_api.entities;
 
 import jakarta.persistence.*;
-import org.hibernate.mapping.List;
 import org.hibernate.mapping.Set;
+
+import java.util.List;
 
 
 @Entity
@@ -19,7 +20,8 @@ public class Ticket {
     private Event event;
 
     @ManyToMany
-    private Set<Basket> baskets;
+    @JoinTable(name="basket_ticket_joint")
+    private List<Basket> baskets;
 
     @ManyToOne
     private Order order;

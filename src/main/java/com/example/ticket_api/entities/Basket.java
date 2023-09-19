@@ -13,7 +13,6 @@ public class Basket {
     private Long id;
 
     @ManyToMany (mappedBy = "baskets")
-//    @JoinTable(name="tickets", joinColumns = @JoinColumn(name="ticket_id"))
     private List<Ticket> tickets;
 
     @OneToOne(mappedBy = "basket")
