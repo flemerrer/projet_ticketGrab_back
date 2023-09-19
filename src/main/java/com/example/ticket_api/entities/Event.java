@@ -16,7 +16,7 @@ public class Event {
     private String name;
 
     @OneToMany(mappedBy = "event")
-    private List<Ticket> ticketList;
+    private List<Ticket> tickets;
 
     @Temporal(TemporalType.DATE)
     private LocalDate date;
@@ -47,11 +47,11 @@ public class Event {
     }
 
     public List<Ticket> getTicketList() {
-        return ticketList;
+        return tickets;
     }
 
     public void ListTicketList(List<Ticket> ticket) {
-        this.ticketList = ticket;
+        this.tickets = ticket;
     }
 
     public LocalDate getDate() {
@@ -91,7 +91,7 @@ public class Event {
         return "Event{" +
                 "id=" + id +
                 ", name=" + name +
-                ", tickets=" + ticketList +
+                ", tickets=" + tickets +
                 ", date=" + date +
                 ", location='" + location + '\'' +
                 ", city='" + city + '\'' +

@@ -20,6 +20,9 @@ public class CreditCard {
 
     private String expirationDate;
 
+    @ManyToOne
+    private User user;
+
     public CreditCard(Long blueprint, String ownerName, String expirationDate) {
         this.blueprint = blueprint;
         this.ownerName = ownerName;
