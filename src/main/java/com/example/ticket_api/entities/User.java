@@ -1,7 +1,6 @@
 package com.example.ticket_api.entities;
 
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -111,5 +110,4 @@ public class User {
                 ", soldTicketsNumber=" + soldTicketsNumber +
                 '}';
     }
-
 }

@@ -1,5 +1,6 @@
 package com.example.ticket_api.entities;
 
+import com.example.ticket_api.entities.dto.EventDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -42,15 +43,24 @@ public class Event {
         return id;
     }
 
-    public void ListId(Long id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Ticket> getTicketList() {
         return tickets;
     }
 
-    public void ListTicketList(List<Ticket> ticket) {
+
+    public void setTicketList(List<Ticket> ticket) {
         this.tickets = ticket;
     }
 
@@ -58,7 +68,7 @@ public class Event {
         return date;
     }
 
-    public void ListDate(LocalDate date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -66,7 +76,7 @@ public class Event {
         return location;
     }
 
-    public void ListLocation(String location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
@@ -74,7 +84,7 @@ public class Event {
         return city;
     }
 
-    public void ListCity(String city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
@@ -82,7 +92,7 @@ public class Event {
         return website;
     }
 
-    public void ListWebsite(String website) {
+    public void setWebsite(String website) {
         this.website = website;
     }
 
@@ -97,5 +107,16 @@ public class Event {
                 ", city='" + city + '\'' +
                 ", website='" + website + '\'' +
                 '}';
+    }
+
+    public EventDTO toDto() {
+
+        EventDTO eventDto = new EventDTO();
+        eventDto.setId(this.getId());
+        eventDto.setName(this.getName());
+        eventDto.setDate(this.getDate());
+        eventDto.setCity(this.getCity());
+
+        return eventDto;
     }
 }

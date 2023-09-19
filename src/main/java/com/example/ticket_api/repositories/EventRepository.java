@@ -10,6 +10,8 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findByNameContainsIgnoreCase(String title);
 
+//    List<Event> findAllByDate
+
 /*    List<Ticket> findBy();
     List<Ticket> findBy();*/
 
