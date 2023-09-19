@@ -36,6 +36,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<User> createUser(@RequestBody User user) {
+
         return userService.createUser(user);
     }
 }
