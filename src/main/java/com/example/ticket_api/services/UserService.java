@@ -32,22 +32,22 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<String> deleteUser (User user) {
-        if (user.getFirstName() != null && user.getLastName() != null && user.getEmail() != null && user.getPassword() != null) {
-            Optional<User> u = userRepo.findUserByEmail(user.getEmail());
-            userRepo.delete(u.get());
+    public ResponseEntity<String> deleteUser (String email) {
+        Optional<User> user=userRepo.findUserByEmail(email);
+        if (user.get().getEmail() != null && user.get().getPassword()!= null ) {
+            userRepo.delete(user.get());
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
         }
     }
     public ResponseEntity<String> deleteAllUsers () {
-        userRepo.deleteAll();
         List<User> users = userRepo.findAll();
         if (users.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(null); // Retourne un code NO CONTENT si l'objet est vide.
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+            userRepo.deleteAll();
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(null); // Retourne un code NO CONTENT si l'objet est vide.
         }
     }
     public ResponseEntity<List<User>> findAllUsers (Model model) {
@@ -82,7 +82,7 @@ public class UserService {
             userRepo.save(user.get());
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }
     }
         public ResponseEntity<User> updateUser (User userToUpdate) {
