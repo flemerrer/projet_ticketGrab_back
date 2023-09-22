@@ -15,13 +15,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity // Activation de la configuration personnalisée de la sécurité
 public class WebSecurityConfiguration {
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
@@ -42,13 +45,20 @@ public class WebSecurityConfiguration {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         //Désactivation de la gestion des en-têtes Cors au sein de Spring Security
-        http
-                .cors(new Customizer<CorsConfigurer<HttpSecurity>>() {
-                    @Override
-                    public void customize(CorsConfigurer<HttpSecurity> httpSecurityCorsConfigurer) {
-                        httpSecurityCorsConfigurer.disable();
-                    }
-                });
+//        http
+//                .cors(new Customizer<CorsConfigurer<HttpSecurity>>() {
+//                    @Override
+//                    public void customize(CorsConfigurer<HttpSecurity> httpSecurityCorsConfigurer) {
+//                        httpSecurityCorsConfigurer.disable();
+//                    }
+//                });
+
+        http.cors(new Customizer<CorsConfigurer<HttpSecurity>>() {
+            @Override
+            public void customize(CorsConfigurer<HttpSecurity> httpSecurityCorsConfigurer) {
+                new CorsConfiguration().applyPermitDefaultValues();
+            }
+        });
 
         //desactivation CSRF
         http.csrf(new Customizer<CsrfConfigurer<HttpSecurity>>() {
@@ -60,16 +70,19 @@ public class WebSecurityConfiguration {
 
         //Configuration des règles d'autorisation concernant les requêtes HTTP
         http.authorizeHttpRequests(requests -> {
-            requests
-                    //Toutes les requêtes HTTP /api/users sont autorisées pour tout le monde (authentifié ou non)
+                    requests
+                            //Toutes les requêtes HTTP /api/users sont autorisées pour tout le monde (authentifié ou non)
 //                    .requestMatchers("/api/*").permitAll()
 //                    .requestMatchers("/api/allusers").permitAll()
 
-                    .requestMatchers("/auth/login").permitAll()
-                    .requestMatchers("/auth/register").permitAll()
-                    //Toutes les requêtes HTTP nécessitent une authentification
-                    .anyRequest().authenticated();
-        });
+                            .requestMatchers("/auth/login").permitAll()
+                            .requestMatchers("/auth/register").permitAll()
+                            //Toutes les requêtes HTTP nécessitent une authentification
+                            .anyRequest().authenticated();
+
+                })
+                .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
         //Configuration de la session Spring sécurité : aucune session ne sera créée côté serveur
         //Moins coûteux et inutile lorsque nous sommes dans une configuration RESTful
         http.sessionManagement(httpSecuritySessionManagementConfigurer -> {
@@ -80,9 +93,6 @@ public class WebSecurityConfiguration {
         // Ce filtre pour gérer l'authentification basée sur le JWT reçu dans les en-têtes des requêtes
         //Le filtre UsernamePasswordAuthenticationFilter est un filtre de base de Spring Security
         //Il est exécuté pour gérer l'authentification par username et mot de passe
-
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
     @Bean

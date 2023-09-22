@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -33,8 +34,8 @@ public class UserService {
 
     public ResponseEntity<String> deleteUser (User user) {
         if (user.getFirstName() != null && user.getLastName() != null && user.getEmail() != null && user.getPassword() != null) {
-            User u = userRepo.findUserByEmailAndPassword(user.getEmail(), user.getPassword());
-            userRepo.delete(u);
+            Optional<User> u = userRepo.findUserByEmail(user.getEmail());
+            userRepo.delete(u.get());
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
@@ -65,31 +66,39 @@ public class UserService {
             return ResponseEntity.notFound().build();
         }
     }
+    public ResponseEntity<User> findUserByEmail(String email) {
+        Optional<User> u=userRepo.findUserByEmail(email);
+        if (u.isPresent()){
+            return ResponseEntity.ok(u.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     public ResponseEntity<User> updatePassword (UserDto userToUpdate) {
-        User user = userRepo.findUserByEmailAndPassword(userToUpdate.getEmail(), userToUpdate.getPassword());
-        if (user != null) {
-            user.setPassword(userToUpdate.getPassword02());
-            userRepo.save(user);
+        Optional<User> user = userRepo.findUserByEmail(userToUpdate.getEmail());
+        if (user.isPresent()) {
+            user.get().setPassword(userToUpdate.getPassword02());
+            userRepo.save(user.get());
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
         }
     }
         public ResponseEntity<User> updateUser (User userToUpdate) {
-            User user = userRepo.findUserByEmailAndPassword(userToUpdate.getEmail(), userToUpdate.getPassword());
-            if (user!=null) {
-                user.setEmail(userToUpdate.getEmail());
-                user.setPassword(userToUpdate.getPassword());
-                user.setFirstName(userToUpdate.getFirstName());
-                user.setLastName(userToUpdate.getLastName());
+            Optional<User> user = userRepo.findUserByEmail(userToUpdate.getEmail());
+            if (user.isPresent()) {
+                user.get().setEmail(userToUpdate.getEmail());
+                user.get().setPassword(userToUpdate.getPassword());
+                user.get().setFirstName(userToUpdate.getFirstName());
+                user.get().setLastName(userToUpdate.getLastName());
                 if (userToUpdate.getSoldTicketsNumber()!=null) {
-                    user.setSoldTicketsNumber(userToUpdate.getSoldTicketsNumber());
+                    user.get().setSoldTicketsNumber(userToUpdate.getSoldTicketsNumber());
                 }
                 if (userToUpdate.getAdmin()!=null) {
-                    user.setAdmin(userToUpdate.getAdmin());
+                    user.get().setAdmin(userToUpdate.getAdmin());
                 }
-                userRepo.save(user);
+                userRepo.save(user.get());
                 return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);

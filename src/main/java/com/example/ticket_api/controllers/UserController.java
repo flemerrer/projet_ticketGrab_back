@@ -19,12 +19,12 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/allusers")
-    public ResponseEntity<List<User>> searchAllTutorials(Model model) {
+    public ResponseEntity<List<User>> searchAllUsers(Model model) {
         return userService.findAllUsers(model);
     }
-    @GetMapping("/allusers/{id}")
-    public ResponseEntity<User> searchAllTutorials(@PathVariable Long id) {
-        return userService.findUserById(id);
+    @GetMapping("/user/{email}")
+    public ResponseEntity<User> searchUserByEmail(@PathVariable String email) {
+        return userService.findUserByEmail(email);
     }
 
     @PostMapping("/createusers")
