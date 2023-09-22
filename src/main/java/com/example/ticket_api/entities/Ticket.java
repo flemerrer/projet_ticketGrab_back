@@ -1,6 +1,10 @@
 package com.example.ticket_api.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.mapping.Set;
+
+import java.util.List;
+
 
 @Entity
 @Table(name="tickets")
@@ -13,16 +17,17 @@ public class Ticket {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "event_id")
     private Event event;
 
-    @ManyToOne
-    @JoinColumn(name = "basket_id")
-    private Basket basket;
+    @ManyToMany
+    @JoinTable(name="basket_ticket_joint")
+    private List<Basket> baskets;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
     private Order order;
+
+    @ManyToOne
+    private User user;
 
 /*
     @ManyToOne

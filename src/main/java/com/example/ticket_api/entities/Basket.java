@@ -12,8 +12,12 @@ public class Basket {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany (mappedBy = "basket")
-    private List<Ticket> ticketList;
+    @ManyToMany (mappedBy = "baskets")
+    private List<Ticket> tickets;
+
+    @OneToOne(mappedBy = "basket")
+    private User user;
+
 
     /*
     @OneToOne(cascade = CascadeType.ALL)
@@ -21,7 +25,7 @@ public class Basket {
     private User buyer;
 */
     public Basket(List<Ticket> ticketList /*, User buyer*/) {
-        this.ticketList = ticketList;
+        this.tickets = ticketList;
       /*  this.buyer = buyer;*/
     }
 
@@ -36,12 +40,12 @@ public class Basket {
         this.id = id;
     }
 
-    public List<Ticket> getTicketList() {
-        return ticketList;
+    public List<Ticket> getTickets() {
+        return tickets;
     }
 
     public void ListTicketList(List<Ticket> ticket) {
-        this.ticketList = ticket;
+        this.tickets = ticket;
     }
 /*
     public User getBuyer() {

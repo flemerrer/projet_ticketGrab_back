@@ -16,6 +16,9 @@ public class Order {
     @OneToMany
     private List<Ticket> ticketList;
 
+    @ManyToOne
+    private User user;
+
     /*
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id", referencedColumnName = "buyer_id")

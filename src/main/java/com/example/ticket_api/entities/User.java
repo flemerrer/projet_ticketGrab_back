@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class User implements UserDetails {
@@ -20,6 +20,18 @@ public class User implements UserDetails {
     private String password;
     private Boolean isAdmin;
     private Integer soldTicketsNumber;
+
+    @OneToMany(mappedBy = "user")
+    private List<Ticket> tickets;
+
+    @OneToMany(mappedBy = "user")
+    private List<CreditCard> cards;
+
+    @OneToOne
+    private Basket basket;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 
     public User() {
     }
