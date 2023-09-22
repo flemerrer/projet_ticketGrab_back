@@ -35,8 +35,8 @@ public class UserController {
     @PostMapping("/updateusers")
     public ResponseEntity<User> updateUser(@RequestBody User user) {return userService.updateUser(user);}
 
-    @PostMapping("/updatepassword")
-    public ResponseEntity<User> updatePassword(@RequestBody UserDto user) {return userService.updatePassword(user);}
+    @PostMapping("/updatepassword/{email}/{password}")
+    public ResponseEntity<User> updatePassword(@PathVariable String email, @PathVariable String password) {return userService.updatePassword(email, password);}
 
     @DeleteMapping("/deleteuser")
     public ResponseEntity<String> deleteUser(@RequestBody User user) {return userService.deleteUser(user);}
