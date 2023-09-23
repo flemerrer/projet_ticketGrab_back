@@ -38,8 +38,8 @@ public class UserController {
     @PostMapping("/updatepassword/{email}/{password}")
     public ResponseEntity<User> updatePassword(@PathVariable String email, @PathVariable String password) {return userService.updatePassword(email, password);}
 
-    @DeleteMapping("/deleteuser")
-    public ResponseEntity<String> deleteUser(@RequestBody User user) {return userService.deleteUser(user);}
+    @PostMapping("/deleteuser")
+    public ResponseEntity<String> deleteUser(@RequestBody String email) {return userService.deleteUser(email);}
 
     @PostMapping("/deleteallusers")
     public ResponseEntity<String> deleteAllUsers() {return userService.deleteAllUsers();}

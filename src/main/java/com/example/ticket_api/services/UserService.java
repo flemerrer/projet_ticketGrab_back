@@ -32,10 +32,10 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<String> deleteUser (User user) {
-        if (user.getFirstName() != null && user.getLastName() != null && user.getEmail() != null && user.getPassword() != null) {
-            Optional<User> u = userRepo.findUserByEmail(user.getEmail());
-            userRepo.delete(u.get());
+    public ResponseEntity<String> deleteUser (String email) {
+        Optional<User> user = userRepo.findUserByEmail(email);
+        if (user.get().getFirstName() != null && user.get().getLastName() != null && user.get().getEmail()!=null) {
+            userRepo.delete(user.get());
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
