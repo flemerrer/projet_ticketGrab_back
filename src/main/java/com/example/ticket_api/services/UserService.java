@@ -78,7 +78,7 @@ public class UserService {
     public ResponseEntity<User> updatePassword (String email, String password) {
         Optional<User> user = userRepo.findUserByEmail(email);
         if (user.isPresent()) {
-            user.get().setPassword(password);
+            user.get().setPassword(passwordEncoder.encode(password));
             userRepo.save(user.get());
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
         } else {
