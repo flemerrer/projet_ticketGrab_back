@@ -42,12 +42,12 @@ public class UserService {
         }
     }
     public ResponseEntity<String> deleteAllUsers () {
-        userRepo.deleteAll();
         List<User> users = userRepo.findAll();
         if (users.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(null); // Retourne un code NO CONTENT si l'objet est vide.
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+            userRepo.deleteAll();
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(null); // Retourne un code NO CONTENT si l'objet est vide.
         }
     }
     public ResponseEntity<List<User>> findAllUsers (Model model) {
@@ -82,7 +82,7 @@ public class UserService {
             userRepo.save(user.get());
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }
     }
         public ResponseEntity<User> updateUser (User userToUpdate) {
