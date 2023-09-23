@@ -27,6 +27,11 @@ public class UserController {
         return userService.findUserByEmail(email);
     }
 
+    @GetMapping("/otheruser/{firstName}")
+    public ResponseEntity<List<User>> searchByFirstName(@PathVariable String firstName) {
+        return userService.findUsersByName(firstName);
+    }
+
     @PostMapping("/createusers")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         return userService.createUser(user);

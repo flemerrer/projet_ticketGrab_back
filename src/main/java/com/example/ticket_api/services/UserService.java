@@ -74,6 +74,14 @@ public class UserService {
             return ResponseEntity.notFound().build();
         }
     }
+    public ResponseEntity<List<User>> findUsersByName(String firstName) {
+        List<User> users = userRepo.findUsersByFirstName(firstName);
+        if (users.isEmpty()) {
+            return ResponseEntity.notFound().build(); // Retourne un code NO CONTENT si l'objet est vide.
+        } else {
+            return ResponseEntity.ok(users);
+        }
+    }
 
     public ResponseEntity<User> updatePassword (String email, String password) {
         Optional<User> user = userRepo.findUserByEmail(email);
