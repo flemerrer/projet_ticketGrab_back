@@ -68,6 +68,14 @@ public class Ticket {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Event getEvent() {
         return event;
     }
@@ -112,7 +120,7 @@ public class Ticket {
         return onSale;
     }
 
-    public void setOnSale(boolean onSale) {
+    public void setOnSale() {
         this.onSale = onSale;
     }
 
@@ -138,5 +146,4 @@ public class Ticket {
                 ", isSold=" + isSold +
                 '}';
     }
-
 }

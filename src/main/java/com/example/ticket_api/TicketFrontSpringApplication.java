@@ -1,5 +1,7 @@
 package com.example.ticket_api;
 
+import com.example.ticket_api.entities.Ticket;
+import com.example.ticket_api.repositories.TicketRepository;
 import com.example.ticket_api.services.BasketService;
 import com.example.ticket_api.services.EventService;
 import com.example.ticket_api.services.OrderService;
@@ -14,6 +16,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.oauth2.resourceserver.OAuth2ResourceServerSecurityMarker;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class TicketFrontSpringApplication implements CommandLineRunner {
@@ -37,6 +42,7 @@ public class TicketFrontSpringApplication implements CommandLineRunner {
         SpringApplication.run(TicketFrontSpringApplication.class, args);
     }
 
+<<<<<<< HEAD
 //    @Bean
 //    CommandLineRunner commandLineRunner() {
 //        return new CommandLineRunner() {
@@ -55,9 +61,30 @@ public class TicketFrontSpringApplication implements CommandLineRunner {
 //            }
 //        };
 //    }
+=======
+    @Bean
+    CommandLineRunner commandLineRunner() {
+        return new CommandLineRunner() {
+            @Override
+            public void run(String... args) throws Exception {
+                String prenom = "Al";
+                String nom = "Hct";
+                String email = "AlHct";
+                String mdp = "blabla";
+                if (userRepository.findUserByEmailAndPassword(email, mdp) == null) {
+//                    User user = new User(email, passwordEncoder.encode(mdp));
+                    User user = new User(prenom, nom, email, mdp);
+                    userRepository.save(user);
+                }
+            }
+
+        };
+    }
+
+
+>>>>>>> 1b739ee (mise a jour du feature ticket, methode post non fonctionnel a discuter en groupe)
     @Override
     public void run(String... args) throws Exception {
-
 //        Event event = new Event("Motocultor", LocalDate.now(), "3 rue Molière", "Paris", "");
 //        eventServ.create(event);
 //
