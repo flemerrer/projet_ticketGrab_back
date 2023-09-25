@@ -59,6 +59,9 @@ public class Ticket {
     public Ticket() {
     }
 
+    public Ticket(String name, String imageLink, int price, boolean onSale, boolean isSold) {
+    }
+
     public Long getId() {
         return id;
     }
