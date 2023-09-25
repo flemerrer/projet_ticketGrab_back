@@ -112,24 +112,4 @@ public class UserService {
                 return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
             }
         }
-
-//        public ResponseEntity<User> login (Model model, String emailUser, String passwordUser) {
-//            User u = userRepo.findUserByEmailAndPassword(emailUser, passwordUser);
-//            if (u==null) {
-//                System.out.println("utilisateur non trouvé");
-//                return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null); // Retourne un code NO CONTENT si l'objet est vide.
-//            } else {
-//                System.out.println("utilisateur trouvé, connexion en cours");
-//                HttpServletRequest request =null;
-//                HttpSession httpSession = request.getSession();
-//                httpSession.setAttribute("username", u.getFirstName());
-//                return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
-//            }
-//        }
-//
-//        public String logoff (HttpSession httpSession, String username) {
-//            System.out.println("Déconnexion en cours");
-//            httpSession.invalidate();
-//            return "Déconnexion réussie";
-//        }
     }

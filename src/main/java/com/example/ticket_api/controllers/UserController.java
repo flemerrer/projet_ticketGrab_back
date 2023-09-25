@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin(origins="*")
 @org.springframework.web.bind.annotation.RestController
-@RequestMapping("/api")
+@RequestMapping("/opi")
 public class UserController {
 
     @Autowired
