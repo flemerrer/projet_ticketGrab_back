@@ -16,13 +16,13 @@ public class Event {
 
     private String name;
 
-<<<<<<< HEAD
+
     @OneToMany(mappedBy = "event")
     private List<Ticket> tickets;
-=======
+
 //    @OneToMany(mappedBy = "event")
 //    private List<Ticket> ticketList;
->>>>>>> 1b739ee (mise a jour du feature ticket, methode post non fonctionnel a discuter en groupe)
+
 
     @Temporal(TemporalType.DATE)
     private LocalDate date;
@@ -60,7 +60,7 @@ public class Event {
         this.name = name;
     }
 
-<<<<<<< HEAD
+
     public List<Ticket> getTicketList() {
         return tickets;
     }
@@ -69,7 +69,7 @@ public class Event {
     public void setTicketList(List<Ticket> ticket) {
         this.tickets = ticket;
     }
-=======
+
 //    public List<Ticket> getTicketList() {
 //        return ticketList;
 //    }
@@ -77,7 +77,7 @@ public class Event {
 //    public void setTicketList(List<Ticket> ticket) {
 //        this.ticketList = ticket;
 //    }
->>>>>>> 1b739ee (mise a jour du feature ticket, methode post non fonctionnel a discuter en groupe)
+
 
     public LocalDate getDate() {
         return date;
@@ -116,11 +116,8 @@ public class Event {
         return "Event{" +
                 "id=" + id +
                 ", name=" + name +
-<<<<<<< HEAD
                 ", tickets=" + tickets +
-=======
                 //", tickets=" + ticketList +
->>>>>>> 1b739ee (mise a jour du feature ticket, methode post non fonctionnel a discuter en groupe)
                 ", date=" + date +
                 ", location='" + location + '\'' +
                 ", city='" + city + '\'' +

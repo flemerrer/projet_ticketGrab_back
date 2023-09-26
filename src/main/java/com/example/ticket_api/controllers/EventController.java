@@ -46,7 +46,7 @@ public class EventController {
     @PostMapping("/add")
     public ResponseEntity createEvent(@RequestBody Event event){
 
-        if (event != null && eventServ.findOneEvent(event.getId()) == null) {
+        if (event != null) {
             eventServ.create(event);
             return ResponseEntity.ok().build();
         } else {

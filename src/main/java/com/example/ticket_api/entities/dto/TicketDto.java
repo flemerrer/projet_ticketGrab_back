@@ -1,17 +1,24 @@
 package com.example.ticket_api.entities.dto;
 
-import com.example.ticket_api.entities.Event;
-
 public class TicketDto {
     private Long id;
-    private String name;
-    private Event event;
+    private Long eventId;
+    private String infos;
+    private EventDTO event;
     private String imageLink;
     private int price;
     private boolean onSale;
     private boolean isSold;
 
     public TicketDto() {
+    }
+
+    public Long getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
     }
 
     public Long getId() {
@@ -22,19 +29,19 @@ public class TicketDto {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getInfos() {
+        return infos;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setInfos(String infos) {
+        this.infos = infos;
     }
 
-    public Event getEvent() {
+    public EventDTO getEvent() {
         return event;
     }
 
-    public void setEvent(Event event) {
+    public void setEvent(EventDTO event) {
         this.event = event;
     }
 

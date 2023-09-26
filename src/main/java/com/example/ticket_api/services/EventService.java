@@ -23,9 +23,11 @@ public class EventService {
         return findAllEvents().stream().map(event -> event.toDto()).toList();
     };
 
-    public List<Event> FindEventsByName(String name) {
-        return eventRepo.findByNameContainsIgnoreCase(name);
-    }
+//    public List<Event> findEventsByName(String name) {
+//        return eventRepo.findByNameContainsIgnoreCase(name);
+//    }
+
+
 
     public Optional<Event> findOneEvent(Long id) {
         return eventRepo.findById(id);

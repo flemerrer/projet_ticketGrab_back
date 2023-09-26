@@ -1,7 +1,6 @@
 package com.example.ticket_api.entities;
 
 import jakarta.persistence.*;
-import org.hibernate.mapping.Set;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    private String infos;
 
     @ManyToOne
     private Event event;
@@ -48,8 +47,8 @@ public class Ticket {
 
     private boolean isSold;
 
-    public Ticket(String name, Event event, String imageLink, int price, boolean onSale, boolean isSold) {
-        this.name = name;
+    public Ticket(String infos, Event event, String imageLink, int price, boolean onSale, boolean isSold) {
+        this.infos = infos;
         this.event = event;
         this.imageLink = imageLink;
         this.price = price;
@@ -68,12 +67,12 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getInfos() {
+        return infos;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setInfos(String infos) {
+        this.infos = infos;
     }
 
     public Event getEvent() {
@@ -136,7 +135,7 @@ public class Ticket {
     public String toString() {
         return "Ticket{" +
                 "id=" + id +
-                ", name=" + name +
+                ", name=" + infos +
                 ", event=" + event +
 /*                ", seller=" + seller +
                 ", buyer=" + buyer +*/

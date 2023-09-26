@@ -72,8 +72,8 @@ public class WebSecurityConfiguration {
         http.authorizeHttpRequests(requests -> {
                     requests
                             //Toutes les requêtes HTTP /api/users sont autorisées pour tout le monde (authentifié ou non)
-//                    .requestMatchers("/api/*").permitAll()
-//                    .requestMatchers("/api/allusers").permitAll()
+                    .requestMatchers("/api/**").permitAll()
+                    //.requestMatchers("/api/allusers").permitAll()
 
                             .requestMatchers("/auth/login").permitAll()
                             .requestMatchers("/auth/register").permitAll()
