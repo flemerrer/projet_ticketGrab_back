@@ -19,14 +19,32 @@ public class EventRepositoryCustomImpl implements EventRepositoryCustom {
     private EntityManager entityManager;
 
     @Override
-    public List<Event> findEventsByNameAndCity(String eventName, String location){
+    public List<Event> findEventsByQuery(String searchquery){
         CriteriaBuilder cBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Event> cQuery = cBuilder.createQuery(Event.class);
 
         Root<Event> event = cQuery.from(Event.class);
 
-        Predicate eventNamePredicate = cBuilder.like(event.get("name"),  "%" + eventName + "%");
-        Predicate eventCityPredicate = cBuilder.like(event.get("city"),  "%" + location + "%");
+        Predicate eventNamePredicate = cBuilder.like(event.get("name"),  "%" + searchquery + "%");
+        Predicate eventCityPredicate = cBuilder.like(event.get("city"),  "%" + searchquery + "%");
+
+        Predicate finalPredicate = cBuilder.or(eventNamePredicate, eventCityPredicate);
+
+        cQuery.where(finalPredicate);
+
+        TypedQuery<Event> query = entityManager.createQuery(cQuery);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Event> findEventsByNameOrCity(String name, String city){
+        CriteriaBuilder cBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Event> cQuery = cBuilder.createQuery(Event.class);
+
+        Root<Event> event = cQuery.from(Event.class);
+
+        Predicate eventNamePredicate = cBuilder.like(event.get("name"),  "%" + name + "%");
+        Predicate eventCityPredicate = cBuilder.like(event.get("city"),  "%" + city + "%");
 
         Predicate finalPredicate = cBuilder.or(eventNamePredicate, eventCityPredicate);
 

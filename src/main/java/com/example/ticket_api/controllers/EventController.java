@@ -32,14 +32,16 @@ public class EventController {
     }
 
     @GetMapping({"/list"})
-    public ResponseEntity < List<EventDTO> > listEvents(@RequestParam(required = false) String name, @RequestParam(required = false) String city){
+    public ResponseEntity < List<EventDTO> > listEvents(@RequestParam(required = false) String search, @RequestParam(required = false) String name, @RequestParam(required = false) String city){
 
         List<EventDTO> eventDtoList;
 
-        if (name == null && city == null) {
-            eventDtoList = eventServ.fetchAllDTOEvents();
+        if (name != null || city != null) {
+            eventDtoList = eventServ.searchEventsByNameOrCity(name, city);
+        } else if (search != null) {
+            eventDtoList = eventServ.searchEventsByQuery(search);
         } else {
-            eventDtoList = eventServ.searchEvents(name, city);
+            eventDtoList = eventServ.fetchAllDTOEvents();
         }
 
         if (eventDtoList != null) {
