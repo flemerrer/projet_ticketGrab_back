@@ -39,15 +39,6 @@ public class TicketFrontSpringApplication implements CommandLineRunner {
 
             @Override
             public void run(String... args) throws Exception {
-                String prenom = "Al";
-                String nom = "Hct";
-                String email = "AlHct";
-                String mdp = "blabla";
-                if (userRepository.findUserByEmailAndPassword(email, mdp) == null) {
-//                    User user = new User(email, passwordEncoder.encode(mdp));
-                    User user = new User(prenom, nom, email, mdp);
-                    userRepository.save(user);
-                }
             }
 
 

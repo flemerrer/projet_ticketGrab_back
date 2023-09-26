@@ -3,6 +3,7 @@ package com.example.ticket_api.services;
 import com.example.ticket_api.entities.Event;
 import com.example.ticket_api.entities.dto.EventDTO;
 import com.example.ticket_api.repositories.EventRepository;
+import com.example.ticket_api.repositories.EventRepositoryCustomImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,13 @@ public class EventService {
 
     @Autowired
     private EventRepository eventRepo;
+
+    @Autowired
+    private EventRepositoryCustomImpl eventRepoCustom;
+
+    public List<EventDTO> searchEvents(String name, String city){
+        return eventRepoCustom.findEventsByNameAndCity(name, city).stream().map(event -> event.toDto()).toList();
+    }
 
     public List<Event> findAllEvents() {
         return eventRepo.findAll();
@@ -37,7 +45,7 @@ public class EventService {
     
     public void deleteEvent(Long id) {
         eventRepo.deleteById(id);
-    }
+    } 
     
 /*
     public void deleteAllEvents() {

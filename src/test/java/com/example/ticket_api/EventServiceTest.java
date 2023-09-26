@@ -46,4 +46,24 @@ class EventServiceTest {
         assertSame(listDTO.get(0).getClass(), EventDTO.class);
     }
 
+    @Test
+    public void whenSearchEventsByName_thenReturnEventsWithSameNameAsDTO(){
+
+        Event event = new Event("Rock en Seine", LocalDate.now(), "", "Luxey", "");
+        eventServ.create(event);
+
+        EventDTO testedEvent = event.toDto();
+
+        String name = "Rock";
+        String city = null;
+
+        List<EventDTO> listDTO = eventServ.searchEvents(name, city);
+
+        assertNotNull(listDTO);
+        assertSame(listDTO.get(0).getName(), testedEvent.getName());
+
+        eventServ.deleteEvent(event.getId());
+
+    }
+
 }
