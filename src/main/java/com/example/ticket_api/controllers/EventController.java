@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/events")
 public class EventController {
 
@@ -31,19 +32,24 @@ public class EventController {
     }
 
     @GetMapping({"/list"})
-    public ResponseEntity < List<EventDTO> > listEvents(){
+    public ResponseEntity < List<EventDTO> > listEvents(@RequestParam(required = false) String name, @RequestParam(required = false) String city){
 
-        List<EventDTO> eventDtoList = eventServ.fetchAllDTOEvents();
+        List<EventDTO> eventDtoList;
+
+        if (name == null && city == null) {
+            eventDtoList = eventServ.fetchAllDTOEvents();
+        } else {
+            eventDtoList = eventServ.searchEvents(name, city);
+        }
 
         if (eventDtoList != null) {
             return ResponseEntity.ok(eventDtoList);
         } else {
             return ResponseEntity.status(404).build();
         }
-
     }
 
-    @PostMapping("/add")
+        @PostMapping("/add")
     public ResponseEntity createEvent(@RequestBody Event event){
 
         if (event != null && eventServ.findOneEvent(event.getId()) == null) {
