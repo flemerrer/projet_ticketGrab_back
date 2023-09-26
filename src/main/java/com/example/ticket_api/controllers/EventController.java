@@ -1,15 +1,15 @@
 package com.example.ticket_api.controllers;
 
 import com.example.ticket_api.entities.Event;
+import com.example.ticket_api.entities.dto.CityDto;
 import com.example.ticket_api.entities.dto.EventDto;
-import com.example.ticket_api.entities.dto.EventDtoCity;
 import com.example.ticket_api.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -27,8 +27,8 @@ public class EventController {
     }
 
     @GetMapping({"", "/cities"})
-    public HashSet<String> getAllCities(){
-        return eventServ.getAllCities();
+    public ResponseEntity< List<CityDto> > getAllCities(){
+        return ResponseEntity.ok(eventServ.getAllCities());
     }
 
     @GetMapping("/{id}")
@@ -58,7 +58,7 @@ public class EventController {
         }
     }
 
-        @PostMapping("/add")
+    @PostMapping("/add")
     public ResponseEntity createEvent(@RequestBody Event event){
 
         if (event != null && eventServ.findOneEvent(event.getId()) == null) {
@@ -67,7 +67,6 @@ public class EventController {
         } else {
             return ResponseEntity.status(409).build();
         }
-
     }
 
     @PutMapping("/update")
