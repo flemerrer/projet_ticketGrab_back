@@ -1,5 +1,6 @@
 package com.example.ticket_api.controllers;
 
+import com.example.ticket_api.entities.Basket;
 import com.example.ticket_api.entities.User;
 import com.example.ticket_api.entities.dto.UserDto;
 import com.example.ticket_api.security.JwtUtils;
@@ -31,6 +32,16 @@ public class AuthenticationController {
         Authentication authentication = authenticationManager.authenticate(usernamePasswordToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String tokenGenerated = jwtUtils.generateJwtToken(authentication);
+        Basket basket =new Basket();
+        return ResponseEntity.ok(tokenGenerated);
+    }
+    @PostMapping("nologin")
+    public ResponseEntity<?> connect() {
+        UserDto user = new UserDto();
+//        Authentication authentication = authenticationManager.authenticate(user);
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String tokenGenerated = jwtUtils.generateJwtToken03(user);
+        Basket basket =new Basket();
         return ResponseEntity.ok(tokenGenerated);
     }
 

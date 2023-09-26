@@ -1,8 +1,10 @@
 package com.example.ticket_api.services;
 
 import com.example.ticket_api.entities.Basket;
+import com.example.ticket_api.entities.Ticket;
 import com.example.ticket_api.repositories.BasketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +23,11 @@ public class BasketService {
     public Optional<Basket> findOneBasket(Long id) {
         return BasketRepo.findById(id);
     }
+
+    public Basket findBasketByUser(User user) {
+        return BasketRepo.findByUser(user);
+    }
+    public List<Ticket> findTicketsByBasket(Basket basket) {return BasketRepo.findByBasket(basket);}
 
     public void create(Basket Basket) {
         BasketRepo.save(Basket);

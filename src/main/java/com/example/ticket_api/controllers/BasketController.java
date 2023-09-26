@@ -1,6 +1,7 @@
 package com.example.ticket_api.controllers;
 
 import com.example.ticket_api.entities.Basket;
+import com.example.ticket_api.entities.User;
 import com.example.ticket_api.services.BasketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +24,15 @@ public class BasketController {
     }
 
 
-    @GetMapping("/{id}")
-    public Basket getOneBasket(@PathVariable Long id){
-
-        Basket basketlist = basketServ.findOneBasket(id).get();
-        return basketlist ;
+    @GetMapping("/basket")
+    public ResponseEntity<Basket> getOneBasket(@RequestBody Basket basket){
+        User user = basket.getUser();
+        if (user!= null) {
+            basketServ.findBasketByUser(user);
+            return ResponseEntity.status(410).build();
+        } else {
+            return ResponseEntity.status(404).build();
+        }
     }
 
     @PostMapping("/add")
