@@ -30,7 +30,7 @@ public class BasketController {
 
 
     @GetMapping("/basket/{id}")
-    public ResponseEntity<Basket> getOneBasket(@RequestBody Long id){
+    public ResponseEntity<Basket> findOneBasket(@RequestBody Long id){
       Optional<Basket> basket = basketServ.findOneBasket(id);
         if (basket!= null) {
             return ResponseEntity.status(410).build();
@@ -39,10 +39,11 @@ public class BasketController {
         }
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Basket> createBasket(@RequestBody User user){
+    @PostMapping("/add/{email}")
+    public ResponseEntity<Basket> createBasket(@PathVariable String email){
+        Optional<User> u = userRepository.findUserByEmail(email);
         Basket basket = new Basket();
-        basket.setUser(user);
+        basket.setUser(u.get());
         if (basket.getId() != null) {
             basketServ.create(basket);
             return ResponseEntity.ok().build();

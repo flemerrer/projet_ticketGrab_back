@@ -37,24 +37,24 @@ public class TicketFrontSpringApplication implements CommandLineRunner {
         SpringApplication.run(TicketFrontSpringApplication.class, args);
     }
 
-//    @Bean
-//    CommandLineRunner commandLineRunner() {
-//        return new CommandLineRunner() {
-//
-//            @Override
-//            public void run(String... args) throws Exception {
-//                String prenom = "Al";
-//                String nom = "Capone";
-//                String email = "Alcapone";
-//                String mdp = "blabla";
-//                if (userRepository.findUserByEmailAndPassword(email, mdp) == null) {
-//                    User user = new User(prenom, nom, email, passwordEncoder.encode(mdp));
-////                    User user = new User(prenom, nom, email, mdp);
-//                    userRepository.save(user);
-//                }
-//            }
-//        };
-//    }
+    @Bean
+    CommandLineRunner commandLineRunner() {
+        return new CommandLineRunner() {
+
+            @Override
+            public void run(String... args) throws Exception {
+                String prenom = "admin";
+                String nom = "admin";
+                String email = "admin";
+                String mdp = "admin";
+                if (userRepository.findUserByEmail(email) == null) {
+                    User user = new User(prenom, nom, email, passwordEncoder.encode(mdp));
+//                    User user = new User(prenom, nom, email, mdp);
+                    userRepository.save(user);
+                }
+            }
+        };
+    }
     @Override
     public void run(String... args) throws Exception {
 
