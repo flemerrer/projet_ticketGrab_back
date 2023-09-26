@@ -17,8 +17,13 @@ public class Event {
     private String name;
 
 
+
     @OneToMany(mappedBy = "event")
     private List<Ticket> tickets;
+
+//    @OneToMany(mappedBy = "event")
+//    private List<Ticket> ticketList;
+
 
 //    @OneToMany(mappedBy = "event")
 //    private List<Ticket> ticketList;
@@ -61,6 +66,7 @@ public class Event {
     }
 
 
+
     public List<Ticket> getTicketList() {
         return tickets;
     }
@@ -69,6 +75,15 @@ public class Event {
     public void setTicketList(List<Ticket> ticket) {
         this.tickets = ticket;
     }
+
+//    public List<Ticket> getTicketList() {
+//        return ticketList;
+//    }
+
+//    public void setTicketList(List<Ticket> ticket) {
+//        this.ticketList = ticket;
+//    }
+
 
 //    public List<Ticket> getTicketList() {
 //        return ticketList;
@@ -116,7 +131,9 @@ public class Event {
         return "Event{" +
                 "id=" + id +
                 ", name=" + name +
+
                 ", tickets=" + tickets +
+
                 //", tickets=" + ticketList +
                 ", date=" + date +
                 ", location='" + location + '\'' +

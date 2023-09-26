@@ -70,12 +70,14 @@ public class Ticket {
         this.id = id;
     }
 
+
     public String getInfos() {
         return infos;
     }
 
     public void setInfos(String infos) {
         this.infos = infos;
+
     }
 
     public Event getEvent() {

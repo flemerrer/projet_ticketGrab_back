@@ -5,6 +5,7 @@ import com.example.ticket_api.entities.Event;
 public class TicketDto {
     private Long id;
     private String name;
+    private Event event;
     private String imageLink;
     private int price;
     private boolean onSale;
@@ -29,6 +30,14 @@ public class TicketDto {
         this.name = name;
     }
 
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
     public String getImageLink() {
         return imageLink;
     }
@@ -44,7 +53,6 @@ public class TicketDto {
     public void setPrice(int price) {
         this.price = price;
     }
-
     public boolean isOnSale() {
         return onSale;
     }
@@ -52,13 +60,10 @@ public class TicketDto {
     public void setOnSale(boolean onSale) {
         this.onSale = onSale;
     }
-
     public boolean isSold() {
         return isSold;
     }
-
     public void setSold(boolean sold) {
         isSold = sold;
     }
-
 }
