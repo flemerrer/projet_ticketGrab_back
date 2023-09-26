@@ -74,7 +74,7 @@ public class WebSecurityConfiguration {
                             //Toutes les requêtes HTTP /api/users sont autorisées pour tout le monde (authentifié ou non)
 //                    .requestMatchers("/api/*").permitAll()
 //                    .requestMatchers("/api/allusers").permitAll()
-                            .requestMatchers("/api/*").permitAll()
+                            .requestMatchers("/api/**").permitAll()
                             .requestMatchers("/auth/*").permitAll()
                             //Toutes les requêtes HTTP nécessitent une authentification
                             .anyRequest().authenticated();

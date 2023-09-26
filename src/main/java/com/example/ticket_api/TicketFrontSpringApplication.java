@@ -4,7 +4,6 @@ import com.example.ticket_api.services.BasketService;
 import com.example.ticket_api.services.EventService;
 import com.example.ticket_api.services.OrderService;
 import com.example.ticket_api.services.TicketService;
-import com.example.ticket_api.entities.User;
 import com.example.ticket_api.repositories.UserRepository;
 import com.example.ticket_api.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +58,7 @@ public class TicketFrontSpringApplication implements CommandLineRunner {
             User user = new User(prenom, nom, email, mdp);
             userRepository.save(user);
 
-        Event event = new Event("Motocultor", LocalDate.now(), "3 rue Molière", "Paris", "");
+        Event event = new Event("Motocultor", LocalDate.now(), "", "Paris", "");
         eventServ.create(event);
 
         Ticket ticket1 = new Ticket("pass WE", event, "link", 10000, true, false);

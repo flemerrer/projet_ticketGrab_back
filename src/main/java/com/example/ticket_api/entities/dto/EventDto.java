@@ -2,14 +2,14 @@ package com.example.ticket_api.entities.dto;
 
 import java.time.LocalDate;
 
-public class EventDTO {
+public class EventDto {
 
     private Long id;
     private String name;
     private LocalDate date;
     private String city;
 
-    public EventDTO() {
+    public EventDto() {
     }
 
     public Long getId() {

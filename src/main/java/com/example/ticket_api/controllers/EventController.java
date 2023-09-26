@@ -1,12 +1,14 @@
 package com.example.ticket_api.controllers;
 
 import com.example.ticket_api.entities.Event;
-import com.example.ticket_api.entities.dto.EventDTO;
+import com.example.ticket_api.entities.dto.EventDto;
+import com.example.ticket_api.entities.dto.EventDtoCity;
 import com.example.ticket_api.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 
 @RestController
@@ -24,6 +26,11 @@ public class EventController {
         return eventList;
     }
 
+    @GetMapping({"", "/cities"})
+    public HashSet<String> getAllCities(){
+        return eventServ.getAllCities();
+    }
+
     @GetMapping("/{id}")
     public Event getOneEvent(@PathVariable Long id){
 
@@ -32,9 +39,9 @@ public class EventController {
     }
 
     @GetMapping({"/list"})
-    public ResponseEntity < List<EventDTO> > listEvents(@RequestParam(required = false) String search, @RequestParam(required = false) String name, @RequestParam(required = false) String city){
+    public ResponseEntity < List<EventDto> > listEvents(@RequestParam(required = false) String search, @RequestParam(required = false) String name, @RequestParam(required = false) String city){
 
-        List<EventDTO> eventDtoList;
+        List<EventDto> eventDtoList;
 
         if (name != null || city != null) {
             eventDtoList = eventServ.searchEventsByNameOrCity(name, city);
