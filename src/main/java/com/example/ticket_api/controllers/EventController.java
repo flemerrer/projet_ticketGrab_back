@@ -1,15 +1,18 @@
 package com.example.ticket_api.controllers;
 
 import com.example.ticket_api.entities.Event;
-import com.example.ticket_api.entities.dto.EventDTO;
+import com.example.ticket_api.entities.dto.CityDto;
+import com.example.ticket_api.entities.dto.EventDto;
 import com.example.ticket_api.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/events")
 public class EventController {
 
@@ -23,6 +26,11 @@ public class EventController {
         return eventList;
     }
 
+    @GetMapping({"", "/cities"})
+    public ResponseEntity< List<CityDto> > getAllCities(){
+        return ResponseEntity.ok(eventServ.getAllCities());
+    }
+
     @GetMapping("/{id}")
     public Event getOneEvent(@PathVariable Long id){
 
@@ -31,16 +39,23 @@ public class EventController {
     }
 
     @GetMapping({"/list"})
-    public ResponseEntity < List<EventDTO> > listEvents(){
+    public ResponseEntity < List<EventDto> > listEvents(@RequestParam(required = false) String search, @RequestParam(required = false) String name, @RequestParam(required = false) String city){
 
-        List<EventDTO> eventDtoList = eventServ.fetchAllDTOEvents();
+        List<EventDto> eventDtoList;
+
+        if (name != null || city != null) {
+            eventDtoList = eventServ.searchEventsByNameOrCity(name, city);
+        } else if (search != null) {
+            eventDtoList = eventServ.searchEventsByQuery(search);
+        } else {
+            eventDtoList = eventServ.fetchAllDTOEvents();
+        }
 
         if (eventDtoList != null) {
             return ResponseEntity.ok(eventDtoList);
         } else {
             return ResponseEntity.status(404).build();
         }
-
     }
 
     @PostMapping("/add")
@@ -52,7 +67,6 @@ public class EventController {
         } else {
             return ResponseEntity.status(409).build();
         }
-
     }
 
     @PutMapping("/update")
