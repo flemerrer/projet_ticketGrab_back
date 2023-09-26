@@ -56,7 +56,7 @@ class EventServiceTest {
 
         String name = "Rock";
 
-        List<EventDTO> listDTO = eventServ.searchEvents(name, null);
+        List<EventDTO> listDTO = eventServ.searchEventsByNameOrCity(name, null);
 
         assertNotNull(listDTO);
         assertEquals("Rock en Seine", testedEvent.getName(), listDTO.get(0).getName());
@@ -75,7 +75,7 @@ class EventServiceTest {
 
         String city = "Luxey";
 
-        List<EventDTO> listDTO = eventServ.searchEvents(null, city);
+        List<EventDTO> listDTO = eventServ.searchEventsByNameOrCity(null, city);
 
         assertNotNull(listDTO);
         assertEquals("Luxey", testedEvent.getCity(), listDTO.get(0).getCity());

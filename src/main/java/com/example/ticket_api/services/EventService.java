@@ -19,8 +19,12 @@ public class EventService {
     @Autowired
     private EventRepositoryCustomImpl eventRepoCustom;
 
-    public List<EventDTO> searchEvents(String name, String city){
-        return eventRepoCustom.findEventsByNameAndCity(name, city).stream().map(event -> event.toDto()).toList();
+    public List<EventDTO> searchEventsByNameOrCity(String name, String city){
+        return eventRepoCustom.findEventsByNameOrCity(name, city).stream().map(event -> event.toDto()).toList();
+    }
+
+    public List<EventDTO> searchEventsByQuery(String searchquery){
+        return eventRepoCustom.findEventsByQuery(searchquery).stream().map(event -> event.toDto()).toList();
     }
 
     public List<Event> findAllEvents() {
