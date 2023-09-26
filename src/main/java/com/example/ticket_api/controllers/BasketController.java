@@ -2,12 +2,15 @@ package com.example.ticket_api.controllers;
 
 import com.example.ticket_api.entities.Basket;
 import com.example.ticket_api.entities.User;
+import com.example.ticket_api.entities.dto.UserDto;
+import com.example.ticket_api.repositories.UserRepository;
 import com.example.ticket_api.services.BasketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/baskets")
@@ -15,6 +18,8 @@ public class BasketController {
     
     @Autowired
     BasketService basketServ;
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping({"", "/all"})
     public List<Basket> getAllBaskets(){
@@ -24,11 +29,10 @@ public class BasketController {
     }
 
 
-    @GetMapping("/basket")
-    public ResponseEntity<Basket> getOneBasket(@RequestBody Basket basket){
-        User user = basket.getUser();
-        if (user!= null) {
-            basketServ.findBasketByUser(user);
+    @GetMapping("/basket/{id}")
+    public ResponseEntity<Basket> getOneBasket(@RequestBody Long id){
+      Optional<Basket> basket = basketServ.findOneBasket(id);
+        if (basket!= null) {
             return ResponseEntity.status(410).build();
         } else {
             return ResponseEntity.status(404).build();
@@ -36,10 +40,11 @@ public class BasketController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity createBasket(@RequestBody Basket Basket){
-
-        if (Basket != null && basketServ.findOneBasket(Basket.getId()) == null) {
-            basketServ.create(Basket);
+    public ResponseEntity<Basket> createBasket(@RequestBody User user){
+        Basket basket = new Basket();
+        basket.setUser(user);
+        if (basket.getId() != null) {
+            basketServ.create(basket);
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.status(409).build();
@@ -60,16 +65,16 @@ public class BasketController {
 
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteBasket(@PathVariable Long id){
-
-        if (basketServ.findOneBasket(id) != null) {
-            basketServ.deleteBasket(id);
-            return ResponseEntity.status(410).build();
-        } else {
-            return ResponseEntity.status(404).build();
-        }
-
-    }
+//    @DeleteMapping("/delete/{id}")
+//    public ResponseEntity deleteBasket(@PathVariable Long id){
+//        Optional<Basket> basket = basketServ.findOneBasket(id);
+//        if (basket != null) {
+//            basketServ.deleteBasket(basket);
+//            return ResponseEntity.status(410).build();
+//        } else {
+//            return ResponseEntity.status(404).build();
+//        }
+//
+//    }
 
 }

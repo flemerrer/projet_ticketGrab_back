@@ -8,11 +8,16 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BasketRepository extends JpaRepository<Basket, Long> {
 
-    public List<Ticket> findByBasket(Basket basket);
+//    public List<Ticket> findByBasket(Basket basket);
     public Basket findByUser(User user);
-    public Basket findByUserDto(UserDto user);
+    public Basket findByUserEmail(String email);
+
+//    public Basket findByUser(UserDto user);
+
+//    public String delete(Optional<Basket> basket);
 }

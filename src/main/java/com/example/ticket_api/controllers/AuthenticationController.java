@@ -38,6 +38,7 @@ public class AuthenticationController {
     @PostMapping("nologin")
     public ResponseEntity<?> connect() {
         UserDto user = new UserDto();
+        user.setEmail("admin");
 //        Authentication authentication = authenticationManager.authenticate(user);
 //        SecurityContextHolder.getContext().setAuthentication(authentication);
         String tokenGenerated = jwtUtils.generateJwtToken03(user);

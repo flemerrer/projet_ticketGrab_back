@@ -25,17 +25,18 @@ public class BasketService {
     }
 
     public Basket findBasketByUser(User user) {
-        return BasketRepo.findByUser(user);
+        String email = user.getUsername();
+        return BasketRepo.findByUserEmail(email);
     }
-    public List<Ticket> findTicketsByBasket(Basket basket) {return BasketRepo.findByBasket(basket);}
+//    public List<Ticket> findTicketsByBasket(Basket basket) {return BasketRepo.findByBasket(basket);}
 
     public void create(Basket Basket) {
         BasketRepo.save(Basket);
     }
     
-    public void deleteBasket(Long id) {
-        BasketRepo.deleteById(id);
-    }
+//    public String deleteBasket(Optional<Basket> basket) {
+//        return BasketRepo.delete(basket);
+//    }
     
 /*
     public void deleteAllBaskets() {
