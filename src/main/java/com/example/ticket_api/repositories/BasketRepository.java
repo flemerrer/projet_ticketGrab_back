@@ -14,8 +14,9 @@ import java.util.Optional;
 public interface BasketRepository extends JpaRepository<Basket, Long> {
 
 //    public List<Ticket> findByBasket(Basket basket);
-    public Basket findByUser(User user);
+    public Basket findBasketByUserEmail(String email);
     public Basket findByUserEmail(String email);
+    public void delete(Basket basket);
 
 //    public Basket findByUser(UserDto user);
 

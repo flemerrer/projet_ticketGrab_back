@@ -67,11 +67,19 @@ public class UserService {
         }
     }
     public ResponseEntity<User> findUserByEmail(String email) {
-        Optional<User> u=userRepo.findUserByEmail(email);
-        if (u.isPresent()){
-            return ResponseEntity.ok(u.get());
+       User u=userRepo.findByEmail(email);
+        if (u != null){
+            return ResponseEntity.ok(u);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+    public User findUserByEmail02(String email) {
+        User u=userRepo.findByEmail(email);
+        if (u != null){
+            return u;
+        } else {
+            return null;
         }
     }
     public ResponseEntity<List<User>> findUsersByName(String firstName) {
