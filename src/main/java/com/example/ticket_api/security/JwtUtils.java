@@ -1,10 +1,8 @@
 package com.example.ticket_api.security;
 
+import com.example.ticket_api.entities.dto.UserDto;
 import com.example.ticket_api.repositories.UserRepository;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,6 +36,30 @@ public class JwtUtils {
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + this.expirationMs))
                 .signWith(secretKey)
+                .compact();
+    }
+    public String generateJwtToken02(UserDto user) {
+//        UserDto user = (UserDetails) authentication.getPrincipal();
+        SecretKeySpec secretKey = new SecretKeySpec(jwtSecret.getBytes(StandardCharsets.UTF_8), "HmacSHA512");
+        return Jwts
+                .builder()
+//                .setSubject(user.getUsername())
+                .setSubject(user.getEmail())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(new Date().getTime() + this.expirationMs))
+                .signWith(secretKey)
+                .compact();
+    }
+    public String generateJwtToken03(UserDto userDto) {
+        Date now = new Date();
+        Date expirationDate = new Date(now.getTime() + expirationMs);
+        SecretKeySpec secretKey = new SecretKeySpec(jwtSecret.getBytes(StandardCharsets.UTF_8), "HmacSHA512");
+
+        return Jwts.builder()
+                .setSubject(userDto.getEmail()) // Set the subject (usually a username)
+                .setExpiration(expirationDate)
+                .claim("email", userDto.getEmail()) // Add custom claims as needed
+                .signWith(SignatureAlgorithm.HS512, secretKey)
                 .compact();
     }
 

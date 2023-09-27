@@ -4,6 +4,14 @@ public class UserDto {
     private String email;
     private String password;
     private String password02;
+    private String token;
+
+    public UserDto(String email, String password, String password02, String token) {
+        this.email = email;
+        this.password = password;
+        this.password02 = password02;
+        this.token = token;
+    }
 
     public UserDto(String email, String password, String password02) {
         this.email = email;
@@ -14,6 +22,10 @@ public class UserDto {
     public UserDto(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public UserDto(String email) {
+        this.email = email;
     }
 
     public UserDto() {

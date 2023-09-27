@@ -46,13 +46,12 @@ public class Basket {
     public void ListTicketList(List<Ticket> ticket) {
         this.tickets = ticket;
     }
-/*
-    public User getBuyer() {
-        return buyer;
+
+    public User getUser() {
+        return user;
     }
 
-    public void ListBuyer(User buyer) {
-        this.buyer = buyer;
+    public void setUser(User user) {
+        this.user = user;
     }
-    */
 }
