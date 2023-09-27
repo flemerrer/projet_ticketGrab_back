@@ -1,7 +1,7 @@
 package com.example.ticket_api.entities;
 
 import com.example.ticket_api.entities.dto.EventDto;
-import com.example.ticket_api.entities.dto.EventDtoCity;
+import com.example.ticket_api.entities.dto.CityDto;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -121,10 +121,4 @@ public class Event {
         return eventDto;
     }
 
-    public EventDtoCity toDtoCity() {
-
-        EventDtoCity eventDto = new EventDtoCity();
-        eventDto.setCity(this.getCity());
-        return eventDto;
-    }
 }

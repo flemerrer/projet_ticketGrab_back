@@ -2,15 +2,13 @@ package com.example.ticket_api.services;
 
 import com.example.ticket_api.entities.Event;
 import com.example.ticket_api.entities.dto.EventDto;
-import com.example.ticket_api.entities.dto.EventDtoCity;
+import com.example.ticket_api.entities.dto.CityDto;
 import com.example.ticket_api.repositories.EventRepository;
 import com.example.ticket_api.repositories.EventRepositoryCustomImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class EventService {
@@ -53,13 +51,26 @@ public class EventService {
         eventRepo.deleteById(id);
     }
 
-    public HashSet<String> getAllCities() {
-        List<EventDtoCity> citiesList = findAllEvents().stream().map(event -> event.toDtoCity()).toList();
+    public List<CityDto> getAllCities() {
+
+        List<Event> allEvents = findAllEvents();
         HashSet<String> cities = new HashSet<String>();
-        for (EventDtoCity c : citiesList) {
-            cities.add(c.getCity());
+        for (Event e : allEvents) {
+            cities.add(e.getCity());
         }
-        return cities;
+
+        List<CityDto> cityDtoList = new ArrayList<CityDto>();
+
+        Long i = 1L;
+
+        for (String c : cities) {
+            CityDto newCity = new CityDto();
+            newCity.setId(i++);
+            newCity.setName(c);
+            cityDtoList.add(newCity);
+        }
+
+        return cityDtoList;
     }
     
 /*
