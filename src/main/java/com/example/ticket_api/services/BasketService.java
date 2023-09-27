@@ -20,8 +20,8 @@ public class BasketService {
         return BasketRepo.findAll();
     }
 
-    public Optional<Basket> findOneBasket(Long id) {
-        return BasketRepo.findById(id);
+    public Basket findOneBasket(String email) {
+        return BasketRepo.findBasketByUserEmail(email);
     }
 
     public Basket findBasketByUser(User user) {
